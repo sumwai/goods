@@ -25,7 +25,7 @@
         "topthink/think-orm": "^2.0",
         "topthink/think-filesystem": "^1.0",
         "topthink/think-cors": "^1.0",
-        "firebase/php-jwt": "^6.10"
+        "firebase/php-jwt": "^5.0"
     },
     "require-dev": {
         "symfony/var-dumper": "^4.2",

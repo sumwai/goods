@@ -2,7 +2,6 @@
 namespace app\common;
 
 use Firebase\JWT\JWT;
-use Firebase\JWT\Key;
 use think\facade\Config;
 use think\Request;
 
@@ -39,7 +38,7 @@ class JwtUtil
             $config = Config::get('jwt');
             
             // 验证JWT令牌
-            $decoded = JWT::decode($token, new Key($config['secret'], $config['algorithm']));
+            $decoded = JWT::decode($token, $config['secret'], [$config['algorithm']]);
             
             // 转换为数组
             return (array) $decoded;
@@ -57,7 +56,8 @@ class JwtUtil
     public static function parseToken(string $token)
     {
         try {
-            $decoded = JWT::decode($token, new Key(Config::get('jwt.secret'), Config::get('jwt.algorithm')));
+            $config = Config::get('jwt');
+            $decoded = JWT::decode($token, $config['secret'], [$config['algorithm']]);
             return (array) $decoded;
         } catch (\Exception $e) {
             return false;
