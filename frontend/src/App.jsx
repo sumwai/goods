@@ -12,6 +12,7 @@ import Layout from './components/Layout'
 // 导入页面组件
 import LoginPage from './pages/LoginPage'
 import RegisterPage from './pages/RegisterPage'
+import UserCenterPage from './pages/UserCenterPage'
 
 // 占位组件 - 首页
 const HomePage = () => {
@@ -39,16 +40,6 @@ const CategoriesPage = () => {
     <div className="categories-page">
       <h2>商品分类</h2>
       <p>商品分类内容将在此实现</p>
-    </div>
-  )
-}
-
-// 占位组件 - 用户中心
-const UserCenterPage = () => {
-  return (
-    <div className="user-center-page">
-      <h2>用户中心</h2>
-      <p>用户中心内容将在此实现</p>
     </div>
   )
 }
