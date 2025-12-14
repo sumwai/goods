@@ -1,4 +1,4 @@
-import { useState } from 'react'
+
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import './App.css'
 // 导入错误处理工具
@@ -9,16 +9,9 @@ import '@mui/icons-material'
 
 // 导入自定义组件
 import Layout from './components/Layout'
-
-// 占位组件 - 登录页
-const LoginPage = () => {
-  return (
-    <div className="login-page">
-      <h2>登录页</h2>
-      <p>登录功能将在此实现</p>
-    </div>
-  )
-}
+// 导入页面组件
+import LoginPage from './pages/LoginPage'
+import RegisterPage from './pages/RegisterPage'
 
 // 占位组件 - 首页
 const HomePage = () => {
@@ -98,7 +91,7 @@ function App() {
         <Routes>
           {/* 特殊页面 - 不使用Layout */}
           <Route path="/login" element={<LoginPage />} />
-          <Route path="/register" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
           <Route path="/product/:id" element={<ProductDetailPage />} />
           <Route path="/order/:id" element={<OrderDetailPage />} />
           <Route path="/setting" element={<ProductDetailPage />} />
