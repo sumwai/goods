@@ -1,6 +1,6 @@
 // 认证状态管理
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { login as loginApi, logout as logoutApi, getUserInfo as getUserInfoApi } from '../api/userApi';
+import { login as loginApi, logout as logoutApi, getUserInfo as getUserInfoApi, register as registerApi } from '../api/userApi';
 import { setToken, removeToken, getToken } from '../utils/auth';
 
 // 异步登录操作
@@ -49,6 +49,20 @@ export const fetchUserInfo = createAsyncThunk(
     } catch (error) {
       // 处理获取用户信息错误
       return rejectWithValue(error.message || '获取用户信息失败');
+    }
+  }
+);
+
+// 异步注册操作
+export const register = createAsyncThunk(
+  'auth/register',
+  async (userData, { rejectWithValue }) => {
+    try {
+      const data = await registerApi(userData);
+      return data;
+    } catch (error) {
+      // 处理注册错误
+      return rejectWithValue(error.message || '注册失败');
     }
   }
 );
@@ -136,6 +150,19 @@ const authSlice = createSlice({
         state.error = action.payload;
         // 如果获取用户信息失败，可能是令牌过期，清除认证状态
         state.isAuthenticated = false;
+      })
+      // 注册操作处理
+      .addCase(register.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(register.fulfilled, (state) => {
+        state.isLoading = false;
+        state.error = null;
+      })
+      .addCase(register.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
       });
   },
 });

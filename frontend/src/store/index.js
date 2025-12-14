@@ -20,7 +20,7 @@ const store = configureStore({
       },
     }),
   // 开发工具配置
-  devTools: process.env.NODE_ENV !== 'production',
+  devTools: import.meta.env.MODE !== 'production',
 });
 
 export default store;
